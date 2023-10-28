@@ -19,8 +19,6 @@ const Loading = () => {
 
   return (
     <div className="saber-Loading">
-      <h1>Loading</h1>
-      <div className="percent">{(percent * 100).toFixed(0)}%</div>
       <DarthVaderSaber percent={percent} />
     </div>
   );
