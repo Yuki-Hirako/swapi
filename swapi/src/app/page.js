@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Loading from "./loading";
@@ -13,22 +13,41 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const sourceRef = useRef(null);
+
   const fetchData = async (page = 1, searchTerm = "") => {
     setIsLoading(true);
+
+    const CancelToken = axios.CancelToken;
+    sourceRef.current = CancelToken.source();
+
     try {
       const response = await axios.get(
-        `https://swapi.dev/api/people/?page=${page}&search=${searchTerm}`
+        `https://swapi.dev/api/people/?page=${page}&search=${searchTerm}`,
+        { cancelToken: sourceRef.current.token }
       );
       setCharacters(response.data.results);
       setTotalPages(Math.ceil(response.data.count / 10));
+      setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching data", error);
+      if (axios.isCancel(error)) {
+        console.log("Request canceled", error.message);
+      } else {
+        console.error("Error fetching data", error);
+        setIsLoading(false);
+      }
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData(currentPage, search);
+    return () => {
+      if (sourceRef.current) {
+        sourceRef.current.cancel(
+          "Query was canceled due to a new request or component unmounting."
+        );
+      }
+    };
   }, [search, currentPage]);
 
   const handleCharacterClick = (url) => {
@@ -50,11 +69,11 @@ export default function Home() {
           placeholder="Search for a Star Wars character..."
         />
         {isLoading ? (
-          <p className="mt-4 text-center">
+          <div className="mt-4 text-center">
             <Loading />
-          </p>
+          </div>
         ) : (
-          <Suspense fallback={<div>Loading characters...</div>}>
+          <Suspense fallback={<Loading />}>
             <CharacterList
               characters={characters}
               onCharacterClick={handleCharacterClick}

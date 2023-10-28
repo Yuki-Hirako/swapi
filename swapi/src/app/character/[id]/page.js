@@ -20,40 +20,40 @@ export default function CharacterPage() {
 
   if (!character)
     return (
-      <p className="text-center text-white mt-5">
+      <div className="text-center text-white mt-5">
         <Loading />
-      </p>
+      </div>
     );
 
   return (
     <div className="min-h-screen bg-gray-800 text-white p-5">
       <h1 className="text-4xl font-bold mb-5">{character.name}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <p>
+        <div>
           <span className="font-semibold">Birth Year:</span>{" "}
           {character.birth_year}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Gender:</span> {character.gender}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Height:</span> {character.height}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Mass:</span> {character.mass}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Hair Color:</span>{" "}
           {character.hair_color}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Skin Color:</span>{" "}
           {character.skin_color}
-        </p>
-        <p>
+        </div>
+        <div>
           <span className="font-semibold">Eye Color:</span>{" "}
           {character.eye_color}
-        </p>
+        </div>
       </div>
       <button
         className="mt-5 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
