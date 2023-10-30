@@ -11,12 +11,15 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const router = useRouter();
 
   const sourceRef = useRef(null);
 
   const fetchData = async (page = 1, searchTerm = "") => {
     setIsLoading(true);
+    setError(null);
 
     const CancelToken = axios.CancelToken;
     sourceRef.current = CancelToken.source();
@@ -26,6 +29,9 @@ export default function Home() {
         `https://swapi.dev/api/people/?page=${page}&search=${searchTerm}`,
         { cancelToken: sourceRef.current.token }
       );
+      if (!response.data.results.length) {
+        setError("No characters found.");
+      }
       setCharacters(response.data.results);
       setTotalPages(Math.ceil(response.data.count / 10));
       setIsLoading(false);
@@ -35,6 +41,7 @@ export default function Home() {
       } else {
         console.error("Error fetching data", error);
         setIsLoading(false);
+        setError("Failed to fetch data. Please try again later.");
       }
     }
   };
@@ -72,6 +79,8 @@ export default function Home() {
           <div className="mt-4 text-center">
             <Loading />
           </div>
+        ) : error ? ( // Check for an error
+          <div className="mt-4 text-center text-red-500">{error}</div>
         ) : (
           <Suspense fallback={<Loading />}>
             <CharacterList
