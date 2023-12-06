@@ -36,24 +36,6 @@ export default function CharacterPage() {
         <div>
           <span className="font-semibold">Gender:</span> {character.gender}
         </div>
-        <div>
-          <span className="font-semibold">Height:</span> {character.height}
-        </div>
-        <div>
-          <span className="font-semibold">Mass:</span> {character.mass}
-        </div>
-        <div>
-          <span className="font-semibold">Hair Color:</span>{" "}
-          {character.hair_color}
-        </div>
-        <div>
-          <span className="font-semibold">Skin Color:</span>{" "}
-          {character.skin_color}
-        </div>
-        <div>
-          <span className="font-semibold">Eye Color:</span>{" "}
-          {character.eye_color}
-        </div>
       </div>
       <button
         className="mt-5 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
