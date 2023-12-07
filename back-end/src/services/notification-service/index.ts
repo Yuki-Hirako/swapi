@@ -12,19 +12,17 @@ async function createNotification({
   title,
   message,
   userId,
-}: CreateNotificationInput) {
-  await notificationRepository.createNotification({
+}: CreateNotificationInput): Promise<Notification> {
+  return await notificationRepository.createNotification({
     title,
     message,
-    user: {
-      connect: {
-        id: userId,
-      },
-    },
+    userId,
   });
 }
 
-async function getAllNotifications(userId: number | undefined): Promise<Notification[]> {
+async function getAllNotifications(
+  userId: number | undefined
+): Promise<Notification[]> {
   return await notificationRepository.getAllNotificationsForUser(userId);
 }
 

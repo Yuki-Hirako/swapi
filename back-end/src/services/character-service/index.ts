@@ -1,4 +1,5 @@
 import characterRepository from "@/repositories/character-repository";
+import { Character } from "@prisma/client";
 import notificationService from "../notification-service";
 
 type CharacterData = {
@@ -7,10 +8,7 @@ type CharacterData = {
   gender: string;
 };
 
-export async function insertCharacter(
-  userId: number,
-  characterData: CharacterData
-) {
+async function insertCharacter(userId: number, characterData: CharacterData) {
   const character = await characterRepository.create({
     ...characterData,
     userId,
@@ -23,8 +21,13 @@ export async function insertCharacter(
   return character;
 }
 
+async function getAllCharacters(): Promise<Character[]> {
+  return await characterRepository.findAll();
+}
+
 const characterService = {
   insertCharacter,
+  getAllCharacters,
 };
 
 export default characterService;

@@ -1,9 +1,13 @@
 import { Router } from "express";
 import { authenticateToken } from "@/middlewares";
-import { insertCharacter } from "@/controllers/character-controller";
+import {
+  getAllCharacters,
+  insertCharacter,
+} from "@/controllers/character-controller";
 
 const characterRouter = Router();
 
 characterRouter.post("/character", authenticateToken, insertCharacter);
+characterRouter.get("/characters", authenticateToken, getAllCharacters);
 
 export { characterRouter };

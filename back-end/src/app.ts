@@ -8,7 +8,7 @@ import {
   authenticationRouter,
   usersRouter,
 } from "./routers";
-import { notificationRouter } from "./routers/notification";
+import { notificationRouter } from "./routers/notification-router";
 
 loadEnv();
 
