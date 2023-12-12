@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Provider>
         <body className={inter.className}>
-          <main className="flex flex-col p-8 itens-center justify-center bg-gray-800">
+          <main className="flex flex-col p-8 items-center justify-center bg-gray-800 w-full">
             {children}
           </main>
         </body>

@@ -1,5 +1,6 @@
-import { insertCharacter } from "@/services/character-service";
+import characterService from "@/services/character-service";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -28,14 +29,24 @@ async function main() {
     { name: "R2-D2", birth_year: "unknown", gender: "n/a" },
   ];
 
+  const saltRounds = 12;
+
   for (const user of users) {
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
     const createdUser = await prisma.user.create({
-      data: user,
+      data: {
+        username: user.username,
+        password: hashedPassword, // Salvar a senha criptografada no banco de dados
+      },
     });
 
     for (let i = 0; i < 3; i++) {
       const characterData = characters[i + users.indexOf(user) * 3];
-      await insertCharacter(createdUser.id, characterData as CharacterData);
+      await characterService.insertCharacter(
+        createdUser.id,
+        characterData as CharacterData
+      );
     }
   }
 }

@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 async function signIn(params: SignInParams): Promise<SignInResult> {
   const { username, password } = params;
 
+  console.log(username, password);
+
   const user = await userRepository.findByName(username as string);
 
   if (!user) {

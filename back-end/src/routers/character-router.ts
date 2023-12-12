@@ -7,7 +7,7 @@ import {
 
 const characterRouter = Router();
 
-characterRouter.post("/character", authenticateToken, insertCharacter);
-characterRouter.get("/characters", authenticateToken, getAllCharacters);
+characterRouter.post("/", authenticateToken, insertCharacter);
+characterRouter.get("/all", authenticateToken, getAllCharacters);
 
 export { characterRouter };
