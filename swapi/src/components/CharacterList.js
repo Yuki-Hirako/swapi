@@ -7,7 +7,7 @@ function CharacterList({ characters, onCharacterClick }) {
         <li
           key={index}
           className="mb-2 cursor-pointer hover:underline"
-          onClick={() => onCharacterClick(char.url)}
+          onClick={() => onCharacterClick(char.id)}
         >
           {char.name}
         </li>

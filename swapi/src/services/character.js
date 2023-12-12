@@ -29,7 +29,8 @@ export const insertCharacter = async (characterData, token) => {
       },
     });
   } catch (error) {
-    throw new Error(error.response.data.message);
+    console.log(error.response.data);
+    throw new Error(error.response.data);
   }
 };
 

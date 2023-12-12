@@ -3,16 +3,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loading from "../../../loading";
 import { getCharacterById } from "../../../../services/character";
+import { useAuth } from "../../../../components/context";
 
 export default function CharacterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const [character, setCharacter] = useState(null);
+  const { token } = useAuth();
 
   useEffect(() => {
     if (id) {
-      getCharacterById(id) // Substitua por sua função para buscar um personagem pelo ID
+      getCharacterById(id, token) // Substitua por sua função para buscar um personagem pelo ID
         .then((response) => {
           setCharacter(response);
         })
