@@ -7,7 +7,7 @@ export async function GET(request) {
   const baseURL = "https://swapi-orcin.vercel.app";
   const redirectURL = new URL("/dashboard/home", baseURL);
 
-  const cookieExpiresInSeconds = 60 * 60 * 24 * 30 * 12;
+  const cookieExpiresInSeconds = 60;
 
   return NextResponse.redirect(redirectURL.toString(), {
     headers: {
