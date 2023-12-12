@@ -1,8 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Loading from "@/app/loading";
+import Loading from "../../../loading";
+import { getCharacterById } from "../../../../services/character";
 
 export default function CharacterPage() {
   const router = useRouter();
@@ -12,9 +12,13 @@ export default function CharacterPage() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`https://swapi.dev/api/people/${id}/`).then((response) => {
-        setCharacter(response.data);
-      });
+      getCharacterById(id) // Substitua por sua função para buscar um personagem pelo ID
+        .then((response) => {
+          setCharacter(response);
+        })
+        .catch((error) => {
+          console.error("Error fetching character", error.message);
+        });
     }
   }, [id]);
 

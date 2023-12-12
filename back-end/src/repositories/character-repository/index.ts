@@ -22,7 +22,16 @@ async function findByName(name: string): Promise<Character[]> {
   });
 }
 
+async function findById(id: string): Promise<Character | null> {
+  return prisma.character.findUnique({
+    where: {
+      id: parseInt(id, 10),
+    },
+  });
+}
+
 const characterRepository = {
+  findById,
   create,
   findAll,
   findByName,

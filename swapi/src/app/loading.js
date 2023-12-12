@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import DarthVaderSaber from "@/components/DarthVaderSaber";
+import DarthVaderSaber from "../components/DarthVaderSaber";
 
 const Loading = () => {
   const [percent, setPercent] = useState(0);

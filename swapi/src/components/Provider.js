@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchProvider } from "@/contexts/SearchContext";
+import { SearchProvider } from "../contexts/SearchContext";
 import { AuthProvider } from "./context";
 
 const Provider = ({ children }) => {

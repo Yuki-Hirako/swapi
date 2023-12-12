@@ -36,3 +36,25 @@ export async function getAllCharacters(
       .send({ message: error.message });
   }
 }
+
+export async function getCharacterById(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  try {
+    const { id } = req.params;
+    const character = await characterService.getCharacterById(id as string);
+
+    if (!character) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .send({ message: "Character not found" });
+    }
+
+    return res.status(httpStatus.OK).send(character);
+  } catch (error: any) {
+    return res
+      .status(httpStatus.INTERNAL_SERVER_ERROR)
+      .send({ message: error.message });
+  }
+}

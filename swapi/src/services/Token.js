@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getUser } from "./user";
-import { useAuth } from "@/components/context";
-import Loading from "@/app/loading";
+import { useAuth } from "../components/context";
+import Loading from "../app/loading";
 
 const Token = ({ newtoken, children }) => {
   const [user, setUser] = useState(null);

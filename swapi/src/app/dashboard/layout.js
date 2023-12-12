@@ -1,6 +1,6 @@
-import Token from "@/services/Token";
+import Token from "../../services/Token";
 import { cookies } from "next/headers";
-import Provider from "@/components/Provider";
+import Provider from "../../components/Provider";
 
 export default function Layout({ children }) {
   const token = cookies().get("token")?.value;

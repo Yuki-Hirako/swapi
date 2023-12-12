@@ -25,9 +25,14 @@ async function getAllCharacters(): Promise<Character[]> {
   return await characterRepository.findAll();
 }
 
+async function getCharacterById(id: string): Promise<Character | null> {
+  return await characterRepository.findById(id);
+}
+
 const characterService = {
   insertCharacter,
   getAllCharacters,
+  getCharacterById
 };
 
 export default characterService;

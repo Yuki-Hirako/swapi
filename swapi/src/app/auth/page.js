@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, EyeClosed, EyeOpen } from "@/components/Icons";
-import { signIn } from "@/services/auth";
+import { ChevronLeft, EyeClosed, EyeOpen } from "../../components/Icons";
+import { signIn } from "../../services/auth";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {

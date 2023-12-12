@@ -2,9 +2,9 @@
 import React, { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../../loading";
-import { SearchProvider, useSearch } from "@/contexts/SearchContext";
-import { getAllCharacters } from "@/services/character";
-import { useAuth } from "@/components/context";
+import { useAuth } from "../../../components/context";
+import { SearchProvider, useSearch } from "../../../contexts/SearchContext";
+import { getAllCharacters } from "../../../services/character";
 const CharacterList = React.lazy(() =>
   import("../../../components/CharacterList")
 );
@@ -51,9 +51,8 @@ export default function Home() {
     };
   }, [searchTerm, currentPage]);
 
-  const handleCharacterClick = (url) => {
-    const id = url.match(/\/([0-9]+)\/$/)[1];
-    router.push(`/character/page?id=${id}`);
+  const handleCharacterClick = (id) => {
+    router.push(`/dashboard/character/page?id=${id}`);
   };
 
   return (

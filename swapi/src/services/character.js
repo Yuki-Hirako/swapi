@@ -32,3 +32,20 @@ export const insertCharacter = async (characterData, token) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export async function getCharacterById(id, token) {
+  if (!token) {
+    throw new Error("Token não encontrado");
+  }
+
+  try {
+    const response = await api.get(`/character/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
